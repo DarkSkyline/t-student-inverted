@@ -127,10 +127,11 @@ function ibetainv(p, a, b) {
   
   function inv(p, dof, twoTailed = true, inverted = true) {
     p = twoTailed ? p / 2 : p;
-    p = inverted ? 1 - p : p;
     var x = ibetainv(2 * Math.min(p, 1 - p), 0.5 * dof, 0.5);
     x = Math.sqrt(dof * (1 - x) / x);
-    return (p > 0.5) ? x : -x;
+    var result = (p > 0.5) ? x : -x;
+    result = inverted ? result * -1 : result;
+    return result;
   };
 
 for(var i = 1; i <= 100; i++){
